@@ -1,0 +1,1 @@
+require 'viget/deployment/recipes'
