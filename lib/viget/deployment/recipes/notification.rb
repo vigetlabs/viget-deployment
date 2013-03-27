@@ -16,18 +16,35 @@ Capistrano::Configuration.instance.load do
 
   namespace :deploy do
 
-    desc "[internal] Notify one or more campfire rooms on deployment"
-    task :notify do
-      notifier = Viget::Deployment::Notifier.new(
-        fetch(:campfire_subdomain),
-        fetch(:campfire_room_names),
-        fetch(:campfire_token),
-        fetch(:campfire_use_ssl),
-        fetch(:github_base_url)
-      )
+    namespace :notify do
+      def unset_var_list
+        keys = [:campfire_subdomain, :campfire_room_names, :campfire_token]
 
-      commit_message = capture("cd #{current_path}; git show --pretty=format:%s HEAD | head -n 1").strip
-      notifier.announce(ENV['USER'], current_revision, commit_message, fetch(:application), fetch(:branch), fetch(:stage))
+        keys.select {|k| fetch(k, nil).nil? }
+      end
+
+      desc "[internal] Notify one or more campfire rooms on deployment"
+      task :default do
+        missing_vars = unset_var_list
+        if missing_vars.empty?
+          campfire
+        else
+          logger.important "Missing values for #{missing_vars.inspect}, skipping Campfire notification"
+        end
+      end
+
+      task :campfire do
+        notifier = Viget::Deployment::Notifier.new(
+          fetch(:campfire_subdomain),
+          fetch(:campfire_room_names),
+          fetch(:campfire_token),
+          fetch(:campfire_use_ssl, true),
+          fetch(:github_base_url, '')
+        )
+
+        commit_message = capture("cd #{current_path}; git show --pretty=format:%s HEAD | head -n 1").strip
+        notifier.announce(ENV['USER'], current_revision, commit_message, fetch(:application), fetch(:branch), fetch(:stage))
+      end
     end
 
   end

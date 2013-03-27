@@ -11,10 +11,27 @@ Capistrano::Configuration.instance.load do
   set(:deploy_to)  { "/var/www/#{application}/#{rails_env}" }
   set(:branch)     { fetch(:rails_env) }
 
+
+  namespace :setup do
+    task :default do
+      deploy.setup
+      strategy.deploy!
+
+      deploy.configuration.create
+      deploy.configuration.symlink
+
+      bundle.install
+    end
+  end
+
   namespace :deploy do
     desc "Deploys code to target environment and runs all migrations"
     task :default do
-      deploy.migrations
+      set :migrate_target, :latest
+      update_code
+      migrate
+      create_symlink
+      restart
     end
 
     desc "Restart passenger with restart.txt"
