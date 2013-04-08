@@ -1,0 +1,1 @@
+set :default_environment, {'PATH' => '/opt/rbenv/shims:/opt/rbenv/bin:$PATH'}
