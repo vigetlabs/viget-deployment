@@ -11,7 +11,6 @@ Capistrano::Configuration.instance.load do
   set(:deploy_to)  { "/var/www/#{application}/#{rails_env}" }
   set(:branch)     { fetch(:rails_env) }
 
-
   namespace :setup do
     task :default do
       deploy.setup
@@ -22,6 +21,14 @@ Capistrano::Configuration.instance.load do
 
       bundle.install
     end
+  end
+
+  task :offline do
+    maintenance.on
+  end
+
+  task :online do
+    maintenance.off
   end
 
   namespace :deploy do
