@@ -9,7 +9,10 @@ Capistrano::Configuration.instance.load do
   set(:rails_env)  { fetch(:stage) }
   set(:repository) { "git@github.com:vigetlabs/#{application}.git" }
   set(:deploy_to)  { "/var/www/#{application}/#{rails_env}" }
-  set(:branch)     { fetch(:rails_env) }
+
+  set(:branch) do
+    (fetch(:rails_env).to_s == 'integration') ? :master : fetch(:rails_env)
+  end
 
   namespace :setup do
     task :default do
