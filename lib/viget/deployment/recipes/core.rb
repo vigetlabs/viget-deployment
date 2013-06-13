@@ -14,6 +14,10 @@ Capistrano::Configuration.instance.load do
     (fetch(:rails_env).to_s == 'integration') ? :master : fetch(:rails_env)
   end
 
+  set(:keep_releases), 5
+
+  after "deploy:update_code", "deploy:cleanup"
+
   namespace :setup do
     task :default do
       deploy.setup
@@ -39,7 +43,6 @@ Capistrano::Configuration.instance.load do
     task :default do
       set :migrate_target, :latest
       update_code
-      cleanup
       migrate
       create_symlink
       restart
