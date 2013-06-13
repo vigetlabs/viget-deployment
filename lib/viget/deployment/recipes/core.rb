@@ -39,6 +39,7 @@ Capistrano::Configuration.instance.load do
     task :default do
       set :migrate_target, :latest
       update_code
+      cleanup
       migrate
       create_symlink
       restart
