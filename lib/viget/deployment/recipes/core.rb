@@ -14,7 +14,7 @@ Capistrano::Configuration.instance.load do
     (fetch(:rails_env).to_s == 'integration') ? :master : fetch(:rails_env)
   end
 
-  set(:keep_releases), 5
+  set :keep_releases, 5
 
   after "deploy:update_code", "deploy:cleanup"
 
