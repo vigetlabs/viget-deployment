@@ -3,7 +3,7 @@ Capistrano::Configuration.instance.load do
   set :configuration_template_path, 'config/deploy/config_files'
 
   after 'deploy:finalize_update', 'deploy:configuration:symlink'
-  after 'deploy:update',          'deploy:configuration:create'
+  after 'deploy:update_code',     'deploy:configuration:create'
 
   namespace :deploy do
     namespace :configuration do
