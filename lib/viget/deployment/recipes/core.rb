@@ -6,6 +6,10 @@ Capistrano::Configuration.instance.load do
   set :use_sudo,      false
   set :default_stage, 'integration'
 
+  # Add the default uploads directory for CarrierWave, etc to the list of
+  # directories that will get symlinked on setup and deploy
+  set :shared_children, %w(public/system log tmp/pids public/uploads)
+
   set(:rails_env)  { fetch(:stage) }
   set(:repository) { "git@github.com:vigetlabs/#{application}.git" }
   set(:deploy_to)  { "/var/www/#{application}/#{rails_env}" }
