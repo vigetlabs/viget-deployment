@@ -39,7 +39,8 @@ Capistrano::Configuration.instance.load do
           fetch(:campfire_room_names),
           fetch(:campfire_token),
           fetch(:campfire_use_ssl, true),
-          fetch(:github_base_url, '')
+          fetch(:github_base_url, ''),
+          fetch(:campfire_announce_token, nil)
         )
 
         commit_message = capture("cd #{current_path}; git show --pretty=format:%s HEAD | head -n 1").strip

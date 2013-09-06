@@ -6,18 +6,23 @@ module Viget
 
       class RoomNotFoundError < Exception; end
 
-      def initialize(subdomain, room_names, token, use_ssl, github_base_url)
+      def initialize(subdomain, room_names, token, use_ssl, github_base_url, announce_token = nil)
         @subdomain       = subdomain
         @room_names      = room_names
         @token           = token
         @use_ssl         = use_ssl
         @github_base_url = github_base_url
+        @announce_token  = announce_token
+      end
+
+      def announce_token
+        @announce_token || ":bell: :hammer:"
       end
 
       def announce(username, revision_number, commit_message, application_name, branch, stage)
         commit_url = "#{@github_base_url}/commit/#{revision_number}"
 
-        message =  %{:bell: :hammer: -> [CAP] }
+        message =  %{#{announce_token} -> [CAP] }
         message << %{#{username} just deployed "#{commit_message}" (#{commit_url}) }
         message << %{from origin/#{branch} to #{application_name}/#{stage}.}
 
