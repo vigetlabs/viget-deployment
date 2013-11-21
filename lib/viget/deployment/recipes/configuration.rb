@@ -14,7 +14,7 @@ Capistrano::Configuration.instance.load do
           results << (out == 'true')
         end
 
-        results == [true]
+        results.all?
       end
 
       def find_templates_in(path)
