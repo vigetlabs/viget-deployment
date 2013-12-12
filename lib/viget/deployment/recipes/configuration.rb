@@ -10,7 +10,7 @@ Capistrano::Configuration.instance.load do
       def remote_file_exists?(path)
         results = []
 
-        invoke_command("if [ -e '#{path}' ]; then echo -n 'true'; fi") do |ch, stream, out|
+        invoke_command("if [ -e '#{path}' ]; then echo -n 'true'; else echo -n 'false'; fi") do |ch, stream, out|
           results << (out == 'true')
         end
 
