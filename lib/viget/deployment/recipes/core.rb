@@ -6,6 +6,9 @@ Capistrano::Configuration.instance.load do
   set :use_sudo,      false
   set :default_stage, 'integration'
 
+  # Forward current user's keys to deployment server for Github checkouts
+  set :ssh_options, {:forward_agent => true}
+
   # Add the default uploads directory for CarrierWave, etc to the list of
   # directories that will get symlinked on setup and deploy
   set :shared_children, %w(public/system log tmp/pids public/uploads)
