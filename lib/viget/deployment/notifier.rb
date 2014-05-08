@@ -29,10 +29,18 @@ module Viget
         speak(message)
       end
 
+      def notified_room_names
+        @notified_room_names ||= []
+      end
+
       private
 
       def speak(message)
-        rooms.each {|r| r.speak(message) }
+        rooms.each do |name, room|
+          if room && room.speak(message)
+            self.notified_room_names << name
+          end
+        end
       end
 
       def room_names
@@ -60,13 +68,7 @@ module Viget
       end
 
       def rooms
-        room_names.map {|n| room_for_name(n) }
-      end
-
-      def room_for_name(name)
-        room = client.find_room_by_name(name)
-        raise(RoomNotFoundError, "Could not find room '#{@room_name}'") if room.nil?
-        room
+        room_names.inject({}) {|m, n| m.merge(n => client.find_room_by_name(n)) }
       end
 
     end

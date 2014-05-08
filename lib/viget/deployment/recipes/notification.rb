@@ -45,6 +45,12 @@ Capistrano::Configuration.instance.load do
 
         commit_message = capture("cd #{current_path}; git show --pretty=format:%s HEAD | head -n 1").strip
         notifier.announce(ENV['USER'], current_revision, commit_message, fetch(:application), fetch(:branch), fetch(:stage))
+
+        if notifier.notified_room_names.any?
+          logger.important "Deployment announcement sent to room(s) '#{notifier.notified_room_names.join(', ')}'"
+        else
+          logger.important "No announcements sent, make sure rooms specified in :campfire_room_names exist"
+        end
       end
     end
 
