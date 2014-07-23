@@ -22,6 +22,8 @@ Since this gem is not intended for public release, you must reference the desire
 
 ## 5-Minute Configuration & Deployment
 
+Run `capify .` if you don't already have a Capfile present (https://github.com/vigetlabs/viget_rails_application_setup will do this for you).
+
 Create a `deploy.rb` file:
 
     # config/deploy.rb
