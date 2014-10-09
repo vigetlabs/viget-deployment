@@ -236,6 +236,9 @@ This will put the maintenance file in the correct place, but you'll need to make
 
 #### Nginx
 
+    set $maintenance      off;
+    set $maintenance_file "/system/maintenance.html";
+
     if (-f "$document_root$maintenance_file") {
       set $maintenance on;
     }
