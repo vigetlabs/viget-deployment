@@ -18,7 +18,7 @@ While many of the defaults are chosen for you, every effort has been made to all
 
 Since this gem is not intended for public release, you must reference the desired release tag from your `Gemfile`:
 
-    gem 'viget-deployment', :tag => '1.0.0', :group => :development, :require => false
+    gem 'viget-deployment', :github => 'vigetlabs/viget-deployment', :tag => '1.0.1', :group => :development, :require => false
 
 ## 5-Minute Configuration & Deployment
 
