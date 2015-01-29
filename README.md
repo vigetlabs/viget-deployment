@@ -7,7 +7,7 @@ At its core, this library takes care of these aspects of deployment:
 * Multi-environment support
 * Bundler integration
 * Smart configuration file generation
-* Deployment notifications
+* Deployment notifications to Slack
 * Maintenance mode
 * Asset precompilation
 * Running migrations on every deploy
@@ -101,17 +101,30 @@ We assume the use of bundler in all deployment environments and use the default 
 
 This affects the default cron configuration as you'll see in a later section.
 
-#### Deployment Notifications
+#### Deployment Notifications to Slack
 
-Notifications are set to go out by default, all you need to do is provide the room name(s) and API key:
+Notifications are set to go out by default, all you need to do is provide the webhook URL and channel name:
 
     # config/deploy.rb
-    set :campfire_room_names, 'Puma'
-    set :campfire_token,      'xxxxxxxxxxxxxx'
+    set :slack_url,     'https://hooks.slack.com/...'
+    set :slack_channel, '#wcs'
 
-You can specify sending of deployment notifications to multiple rooms as well:
+Other configuration options:
 
-    set :campfire_room_names, ['Developers', 'Puma']
+    # Username to display for this notification
+    #
+    # Default: <environment> Deploy
+    set :slack_username, 'WCS Deploy'
+
+    # Emoji to show for the notification's avatar
+    #
+    # Default: :bell:
+    set :slack_emoji, ':shoekid:'
+
+    # URL of your app
+    #
+    # Default: nil
+    set :slack_app_url, 'http://wcs.staging.vigetx.com/admin'
 
 #### Configuration File Generation
 
