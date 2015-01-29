@@ -189,6 +189,15 @@ In the interest of simplicity, this tool provides only a few top-level commands:
     $ cap offline
     $ cap online
 
+
+#### Git deploy tags
+
+viget-deployment can automatically push a git tag containing the environment and timestamp. Just load the recipe in the appropriate environment(s):
+
+    # config/deploy/production.rb
+    load 'deploy_tag'
+
+
 ### Setup
 
 This is how you bootstrap your application servers that you're putting into service:
