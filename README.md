@@ -103,7 +103,7 @@ This affects the default cron configuration as you'll see in a later section.
 
 #### Deployment Notifications to Slack
 
-Notifications are set to go out by default, all you need to do is provide the webhook URL and channel name:
+Notifications are set to go out by default, all you need to do is provide the channel name and webhook URL (search VigeSafe for "Slack Webhook URL"):
 
     # config/deploy.rb
     set :slack_url,     'https://hooks.slack.com/...'
