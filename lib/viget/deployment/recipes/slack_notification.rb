@@ -21,11 +21,7 @@ Capistrano::Configuration.instance.load do
           next
         end
 
-        notifier = Viget::Deployment::SlackNotifier.new(
-          self,
-          slack_url:     fetch(:slack_url),
-          slack_channel: fetch(:slack_channel)
-        )
+        notifier = Viget::Deployment::SlackNotifier.new(self, fetch(:slack_url), fetch(:slack_channel))
 
         notifier.notify
 

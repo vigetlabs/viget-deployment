@@ -7,7 +7,7 @@ module Viget
     class SlackNotifier
       attr_reader :cap, :slack_url, :slack_channel
 
-      def initialize(cap, slack_url:, slack_channel:)
+      def initialize(cap, slack_url, slack_channel)
         @cap           = cap
         @slack_channel = slack_channel
         @slack_url     = slack_url
