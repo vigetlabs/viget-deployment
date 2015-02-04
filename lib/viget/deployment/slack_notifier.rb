@@ -119,7 +119,7 @@ module Viget
       end
 
       def branch_url
-        branch = cap.fetch(:branch).split('/').last
+        branch = cap.fetch(:branch).to_s.split('/').last
 
         "#{github_url}/commits/#{branch}"
       end
