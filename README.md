@@ -29,6 +29,7 @@ Create a `deploy.rb` file:
     # config/deploy.rb
     require 'viget/deployment'
     set :application, 'puma'
+    set :user, "deploy"
 
 Create at least one environment file (for your default environment):
 
@@ -103,7 +104,7 @@ This affects the default cron configuration as you'll see in a later section.
 
 #### Deployment Notifications to Slack
 
-Notifications are set to go out by default, all you need to do is provide the channel name and webhook URL (search VigeSafe for "Slack Webhook URL"):
+Notifications are set to go out by default, all you need to do is provide the channel name and [webhook URL](http://vigesafe.lab.viget.com/passwords/80588ecb-c996-413a-9b58-23e12c11b535):
 
     # config/deploy.rb
     set :slack_url,     'https://hooks.slack.com/...'
