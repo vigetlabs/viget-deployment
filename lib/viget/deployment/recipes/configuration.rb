@@ -24,7 +24,7 @@ Capistrano::Configuration.instance.load do
       end
 
       desc "Create configuration files from templates defined in :configuration_template_path directory"
-      task :create, :roles => :app do
+      task :create, :except => {:no_release => true} do
         find_templates_in(fetch(:configuration_template_path)).each do |template_filename, filename|
           dest_path = "#{shared_path}/config/#{filename}"
 
@@ -40,7 +40,7 @@ Capistrano::Configuration.instance.load do
       end
 
       desc "Link created configuration to current release"
-      task :symlink, :roles => :app do
+      task :symlink, :except => {:no_release => true} do
         find_templates_in(fetch(:configuration_template_path)).each do |template, filename|
           target  = "#{shared_path}/config/#{filename}"
           symlink = "#{release_path}/config/#{filename}"
