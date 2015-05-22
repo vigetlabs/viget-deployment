@@ -8,6 +8,6 @@ namespace :rails do
 end
 
 def run_interactively(command, server=nil)
-  server ||= find_servesr_for_task(current_task).first
+  server ||= find_servers_for_task(current_task).first
   exec %Q(ssh -l #{user} #{server} -t 'su - #{user} -c "cd #{current_path} && #{command}"')
 end
