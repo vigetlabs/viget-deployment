@@ -196,6 +196,17 @@ Or for something like `cron.log`:
 
     $ cap production logs:tail -s file=cron
 
+#### Remote Rails console
+
+This is not available by default. To use this feature, load this recipe in the appropriate environment(s) or main `./config/deploy.rb` with:
+
+    # config/deploy/integration
+    load 'rails_console'
+
+To use it, it will default to using the current environment (stage) name.
+
+    $ cap integration rails:console
+
 ## Deployment
 
 In the interest of simplicity, this tool provides only a few top-level commands:
