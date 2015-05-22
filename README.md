@@ -181,6 +181,21 @@ We use rbenv for some deployment environments which requires updates to the `PAT
     # config/deploy/integration.rb
     load 'rbenv'
 
+#### Tailing logs
+
+This is not available by default. To use this feature, load this recipe in the appropriate environment(s) or main `./config/deploy.rb` with:
+
+    # config/deploy/production.rb
+    load 'logs'
+
+To use it, it will default to using the current environment (stage) name. However, you can specify a different filename if desired:
+
+    $ cap production logs:tail
+
+Or for something like `cron.log`:
+
+    $ cap production logs:tail -s file=cron
+
 ## Deployment
 
 In the interest of simplicity, this tool provides only a few top-level commands:
