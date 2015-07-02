@@ -9,5 +9,5 @@ end
 
 def run_interactively(command, server=nil)
   server ||= find_servers_for_task(current_task).first
-  exec %Q(ssh -l #{user} #{server} -t 'su - #{user} -c "cd #{current_path} && #{command}"')
+  exec %Q(ssh -l #{user} #{server} -t '/bin/bash -l -c "cd #{current_path} && #{command}"')
 end
