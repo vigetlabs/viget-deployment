@@ -19,14 +19,14 @@ module Viget
 
       def payload
         {
-          channel:    slack_channel,
-          username:   slack_username,
-          icon_emoji: slack_emoji,
+          channel:    clean(slack_channel),
+          username:   clean(slack_username),
+          icon_emoji: clean(slack_emoji),
           attachments: [{
-            fallback:   fallback,
-            title:      current_revision,
-            text:       commit_message,
-            title_link: commit_url,
+            fallback:   clean(fallback),
+            title:      clean(current_revision),
+            text:       clean(commit_message),
+            title_link: clean(commit_url),
             color:      color,
             fields: [
               deployed_by_field,
@@ -148,6 +148,16 @@ module Viget
         request.set_form_data(payload: JSON.generate(payload))
 
         http.request(request)
+      end
+
+      def clean(thinger)
+        opts = {
+          invalid: :replace,
+          undef:   :replace,
+          replace: ''
+        }
+
+        thinger.encode(Encoding.find('ASCII'), opts)
       end
     end
   end
