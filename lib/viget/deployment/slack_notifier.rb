@@ -98,7 +98,7 @@ module Viget
       end
 
       def environment
-        cap.fetch(:stage).to_s.capitalize
+        cap.fetch(:stage).to_s.split('_').map(&:capitalize).join(' ')
       end
 
       def git_username
