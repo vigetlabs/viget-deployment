@@ -1,0 +1,37 @@
+<?php  if ( ! defined('BASEPATH') ) exit('No direct script access allowed');
+
+$active_group = 'expressionengine';
+$active_record = TRUE;
+
+// Basic info
+<% host = ask(" *     Database Host: ", 'localhost') -%>
+<% port = ask(" *     Database Port: ") -%>
+<% if port.strip.length > 0 -%>
+$db['expressionengine']['hostname'] = "<%= host %>:<%= port %>"; // host name - probably localhost
+<% else -%>
+$db['expressionengine']['hostname'] = "<%= host %>"; // host name - probably localhost
+<% end -%>
+$db['expressionengine']['database'] = "<%= ask(" *     Database Name: ") %>"; // database
+$db['expressionengine']['username'] = "<%= ask(" * Database Username: ") %>"; // username
+$db['expressionengine']['password'] = "<%= ask(" * Database Password: ") %>"; // password
+$db['expressionengine']['path_to_mysql_command'] = "mysql"; // where your mysql command is
+
+// DB preferences
+$db['expressionengine']['dbdriver'] = "mysql";
+$db['expressionengine']['dbprefix'] = "exp_";
+$db['expressionengine']['pconnect'] = FALSE;
+$db['expressionengine']['swap_pre'] = "exp_";
+$db['expressionengine']['db_debug'] = TRUE;
+$db['expressionengine']['cache_on'] = FALSE;
+$db['expressionengine']['autoinit'] = FALSE;
+$db['expressionengine']['char_set'] = "utf8";
+$db['expressionengine']['dbcollat'] = "utf8_general_ci";
+
+$config = array();
+include 'config.php';
+
+// caching directory - replace [PATH TO EE WEBROOT] with the path to the EE root folder
+$db['expressionengine']['cachedir'] = $config['site_url'] . "<%= ee_system %>/expressionengine/cache/db_cache/";
+
+/* End of file database.php */
+/* Location: ./<%= ee_system %>/expressionengine/config/database.php */

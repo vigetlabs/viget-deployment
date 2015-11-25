@@ -1,0 +1,8 @@
+<%= rails_env %>:
+  encoding: utf8
+  pool: 5
+  adapter:  <%= ask(" *  Database Adapter: ") %>
+  host:     <%= ask(" *     Database Host: ", "localhost") %>
+  database: <%= ask(" *     Database Name: ") %>
+  username: <%= ask(" * Database Username: ") %>
+  password: <%= ask(" * Database Password: ") %>
