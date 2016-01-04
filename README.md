@@ -27,7 +27,7 @@ Run `capify .` if you don't already have a Capfile present (https://github.com/v
 Create a `deploy.rb` file:
 
     # config/deploy.rb
-    require 'viget/deployment'
+    require 'viget/deployment/rails'
     set :application, 'puma'
     set :user, "deploy"
 
@@ -53,7 +53,7 @@ Every deployment requires at least 2 files:
 Once installed, a basic `deploy.rb` file might look like:
 
     # config/deploy.rb
-    require 'viget/deployment'
+    require 'viget/deployment/rails'
     set :application, 'puma'
 
 What this does:
