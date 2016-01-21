@@ -107,8 +107,6 @@ namespace :craft do
 
     desc "Generate necessary Craft configuration files"
     task :create do
-      ee_system = system_dir
-
       config_files = {
         'config.yml.erb'   => 'config/config.yml',
         'db.php.erb' => "#{system_dir}/config/db.php"
