@@ -1,0 +1,10 @@
+database:
+  adapter:  mysql
+  host:     <%= ask(" *     Database Host: ", 'localhost') %>
+<% port =       ask(" *     Database Port: ") -%>
+<% if port.strip.length > 0 -%>
+  port:     <%= port %>
+<% end -%>
+  database: <%= ask(" *     Database Name: ") %>
+  user:     <%= ask(" * Database Username: ") %>
+  password: <%= ask(" * Database Password: ") %>
