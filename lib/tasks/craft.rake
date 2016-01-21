@@ -109,7 +109,7 @@ namespace :craft do
     task :create do
       config_files = {
         'config.yml.erb'   => 'config/config.yml',
-        'db.php.erb' => "#{system_dir}/config/db.php"
+        'db.php.erb' => "craft/config/db.php"
       }
 
       missing_files = config_files.values.reject {|f| File.exist?(f) }
@@ -138,7 +138,7 @@ namespace :craft do
     desc "Remove all generated Craft configuration files"
     task :remove do
       files = [
-        "#{system_dir}/config/db.php",
+        "craft/config/db.php",
         "config/config.yml"
       ]
 
