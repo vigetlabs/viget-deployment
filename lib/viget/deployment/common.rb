@@ -21,8 +21,6 @@ def run_rake_task(command, options = {})
   end
 end
 
-require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
-
 require 'viget/deployment/shared/slack_notification'
 require 'viget/deployment/shared/maintenance'

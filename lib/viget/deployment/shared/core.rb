@@ -8,7 +8,7 @@ Capistrano::Configuration.instance.load do
   # Forward current user's keys to deployment server for Github checkouts
   set :ssh_options, {:forward_agent => true}
 
-  set(:repository) { "git@github.com:vigetlabs/#{application}.git" }
+  set :repo_url { "git@github.com:vigetlabs/#{application}.git" }
 
   set :keep_releases, 5
 
