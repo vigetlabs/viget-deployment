@@ -11,7 +11,7 @@ module Viget
 end
 
 def run_rake_task(command, options = {})
-  options[:remote] ||= true
+  options[:remote] = true unless options.has_key?(:remote)
 
   if options[:remote]
     escaped_release = latest_release.to_s.shellescape
