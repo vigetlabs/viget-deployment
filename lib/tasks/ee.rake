@@ -126,7 +126,7 @@ namespace :ee do
 
         file_caches.each do |cache_path|
           puts " * Wiping cache directory: #{cache_path}"
-          FileUtils.rm_rf("#{cache_path}/*")
+          FileUtils.rm_rf(Dir["#{cache_path}/*"])
         end
         puts "Cleared file cache"
       end
