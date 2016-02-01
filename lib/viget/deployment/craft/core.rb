@@ -64,12 +64,8 @@ Capistrano::Configuration.instance.load do
 
     desc "Set permissions on shared folders and configuration files"
     task :set_permissions, :roles => :app, :except => {:no_release => true} do
-      %(config/config.yml config/db.php).each do |config_file|
+      %w(config/config.yml config/db.php).each do |config_file|
         run "chmod 0666 #{shared_path}/#{config_file}"
-      end
-
-      shared_paths.values.each do |dir|
-        run "chmod -r 0777 #{shared_path}/#{dir}"
       end
     end
 
