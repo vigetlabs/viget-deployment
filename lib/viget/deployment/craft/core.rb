@@ -12,13 +12,11 @@ Capistrano::Configuration.instance.load do
   #set :craft_system,       'app'
 
   set :mapped_paths, {
-    'public/uploads'             => 'public/uploads',
-    'craft/storage/userphotos'   => 'craft/storage/userphotos',
-    'craft/storage/backups'      => 'craft/storage/backups',
-    'craft/storage/runtime/logs' => 'craft/storage/runtime/logs'
+    'public/uploads' => 'public/uploads',
+    'craft/storage'  => 'craft/storage'
   }
 
-  set :upload_paths, mapped_paths.values - ['craft/storage/backups', 'craft/storage/runtime/logs']
+  set :upload_paths, mapped_paths.values + ['craft/storage/userphotos']
   set :shared_children, []
 
   set(:shared_paths) { fetch(:mapped_paths) }

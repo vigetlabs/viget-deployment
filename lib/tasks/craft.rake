@@ -99,6 +99,20 @@ namespace :craft do
     task :export         => [:export_to_file]
   end
 
+  namespace :cache do
+    namespace :templates do
+      desc "Clear the generated template caches"
+      task :clear do
+        print " * Clearing template caches ... "
+        FileUtils.rm_rf(Dir['craft/storage/runtime/compiled_templates/*'])
+        puts  "done."
+      end
+    end
+
+    desc "Clear all available caches"
+    task :clear => ['templates:clear']
+  end
+
   task :config => ['config:create']
 
   namespace :config do
