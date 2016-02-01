@@ -2,8 +2,8 @@ require 'viget/deployment/shared/core'
 
 Capistrano::Configuration.instance.load do
 
-  after 'deploy:setup',         'deploy:protect_shared_directories'
-  after 'deploy:finalize_code', 'deploy:set_permissions'
+  after 'deploy:setup',           'deploy:protect_shared_directories'
+  after 'deploy:finalize_update', 'deploy:set_permissions'
 
   set :deployment_type, 'craft'
   set :default_stage,   'staging'
