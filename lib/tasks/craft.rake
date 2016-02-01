@@ -122,8 +122,8 @@ namespace :craft do
     desc "Generate necessary Craft configuration files"
     task :create do
       config_files = {
-        'config.yml.erb'   => 'config/config.yml',
-        'db.php.erb' => "craft/config/db.php"
+        'config.yml.erb' => 'config/config.yml',
+        'db.php.erb'     => 'craft/config/db.php'
       }
 
       missing_files = config_files.values.reject {|f| File.exist?(f) }
