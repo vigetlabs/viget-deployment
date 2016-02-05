@@ -7,6 +7,6 @@ end
 Capistrano::Configuration.instance.load 'rbenv'
 
 require 'viget/deployment/craft/core'
-require 'viget/deployment/craft/configuration'
-require 'viget/deployment/craft/sync'
+require 'viget/deployment/cms/configuration'
+require 'viget/deployment/cms/sync'
 require 'viget/deployment/craft/cache'

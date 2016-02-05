@@ -9,10 +9,11 @@ Capistrano::Configuration.instance.load do
 
       task :symlink_database_config, :roles => :app, :except => {:no_release => true} do
         escaped_release = latest_release.to_s.shellescape
-        link_path       = "#{escaped_release}/craft/config/db.php"
+        link_name       = "#{escaped_release}/#{database_configuration_path}"
+        target          = "#{shared_path}/config/#{File.basename(database_configuration_path)}"
 
-        run "rm -rf -- #{link_path}"
-        run "ln -s  -- #{shared_path}/config/db.php #{link_path}"
+        run "rm -rf -- #{link_name}"
+        run "ln -s  -- #{target} #{link_name}"
       end
 
     end

@@ -21,12 +21,11 @@ Capistrano::Configuration.instance.load do
     desc "Copy database from target environment to local system"
     task :db, :roles => :db, :only => {:primary => true} do
       filename = 'data/db_dump.sql'
-      # TODO: can we zip this?
 
-      run_rake_task "craft:db:export_to_file[#{filename}]"
+      run_rake_task "db:export_to_file[#{filename}]"
       download "#{current_path}/#{filename}", filename
 
-      run_rake_task "craft:db:import", :remote => false
+      run_rake_task "db:import", :remote => false
     end
 
   end

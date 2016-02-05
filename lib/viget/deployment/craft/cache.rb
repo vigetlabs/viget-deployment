@@ -13,7 +13,7 @@ Capistrano::Configuration.instance.load do
       namespace :templates do
         desc "Clear the templates cache"
         task :clear, :roles => :app do
-          run_rake_task "craft:cache:templates:clear"
+          run_rake_task "cache:templates:clear"
         end
       end
 
