@@ -25,7 +25,7 @@ namespace :cache do
     desc "Clear the EE filesystem caches"
     task :clear do
       file_caches = [
-        "#{system_dir}/expressionengine/cache/#{db_cache}",
+        "#{system_dir}/expressionengine/cache/db_cache",
         "static"
       ]
 
