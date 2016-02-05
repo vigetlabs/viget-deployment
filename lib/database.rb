@@ -18,7 +18,7 @@ class Database
   end
 
   def create
-    execute "CREATE DATABASE IF NOT EXISTS #{database}"
+    execute "CREATE DATABASE IF NOT EXISTS `#{database}`"
   end
 
   def db_execute(command)
