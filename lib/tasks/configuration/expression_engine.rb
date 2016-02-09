@@ -17,7 +17,7 @@ module Configuration
       Pathname.new(paths.first).join('..').basename
     end
 
-    def ee_systems
+    def ee_system
       system_dir
     end
 
