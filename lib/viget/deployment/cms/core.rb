@@ -2,8 +2,8 @@ require 'viget/deployment/shared/core'
 
 Capistrano::Configuration.instance.load do
 
-  after 'deploy:setup',         'deploy:protect_shared_directories'
-  after 'deploy:finalize_code', 'deploy:set_permissions'
+  after 'deploy:setup',           'deploy:protect_shared_directories'
+  after 'deploy:finalize_update', 'deploy:set_permissions'
 
   set :public_children, []        # No Rails-managed public assets
   set :shared_children, []
@@ -48,10 +48,14 @@ Capistrano::Configuration.instance.load do
       restart
     end
 
-    desc "Set permissions on configuration files"
+    desc "Set permissions on configuration files and system paths"
     task :set_permissions, :roles => :app, :except => {:no_release => true} do
       configuration_files.each do |config_file|
         run "chmod 0666 #{shared_path}/#{config_file}"
+      end
+
+      system_paths.each do |path|
+        run "chmod 0774 #{release_path}/#{path}"
       end
     end
 

@@ -20,6 +20,7 @@ Capistrano::Configuration.instance.load do
   }
 
   set :upload_paths,                mapped_paths.values - ['system', 'system/cache', 'cache']
+  set :system_paths,                []
   set :configuration_files,         ['config/config.yml', 'config/database.php']
 
   set(:database_configuration_path) { "#{ee_system}/expressionengine/config/database.php" }
