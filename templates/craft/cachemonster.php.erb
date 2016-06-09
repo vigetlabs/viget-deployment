@@ -1,0 +1,18 @@
+<?php
+
+return array(
+    'cacheElementQueries' => true,
+    'enableTemplateCaching' => true,
+    'includeQueryString' => true,
+
+    'externalCachingService' => 'CloudFlare',
+    'externalCachingServiceSettings' => array(
+        'url' => CRAFT_SITE_URL,
+        'authEmail' => '<%= ask(" *     CacheMonster CloudFlare Auth Email: ") %>',
+        'authKey' => '<%= ask(" *     CacheMonster CloudFlare Auth Key: ") %>',
+        'zoneId' => '<%= ask(" *     CacheMonster CloudFlare Zone ID: ") %>'
+    ),
+
+    'enableCacheWarming' => false,
+    'excludeQueryStringsWhenWarming' => true,
+);

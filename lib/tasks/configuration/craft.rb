@@ -12,8 +12,9 @@ module Configuration
 
     def configuration_file_mapping
       {
-        'config.yml.erb' => 'config/config.yml',
-        'db.php.erb'     => 'craft/config/db.php'
+        'config.yml.erb'       => 'config/config.yml',
+        'db.php.erb'           => 'craft/config/db.php',
+        'cachemonster.php.erb' => 'craft/config/cachemonster.php'
       }
     end
 
