@@ -43,7 +43,7 @@ class Database
   end
 
   def inline_password
-    @options['password'] ? "MYSQL_PWD=#{@options['password']} " : ''
+    @options['password'] ? "MYSQL_PWD='#{@options['password']}' " : ''
   end
 
   def command_flags
