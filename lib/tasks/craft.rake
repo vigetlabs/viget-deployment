@@ -1,9 +1,16 @@
 require 'yaml'
 require 'erb'
+require 'pathname'
 
 lib_dir = Pathname.new(File.dirname(__FILE__)).join('..')
 
+require lib_dir.join('command_helper')
+
 require lib_dir.join('database')
+require lib_dir.join('database', 'file')
+require lib_dir.join('database', 'zip_file')
+require lib_dir.join('database', 'dump_file')
+
 require lib_dir.join('tasks', 'configuration')
 require lib_dir.join('tasks', 'configuration', 'craft')
 

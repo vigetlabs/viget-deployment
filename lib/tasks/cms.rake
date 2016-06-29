@@ -25,7 +25,7 @@ namespace :db do
 
   desc "Import the database from the specified dumpfile (or default)"
   task :import_from_file, [:file] do |t, args|
-    args.with_defaults(:file => 'data/db_dump.sql')
+    args.with_defaults(:file => 'data/db_dump.zip')
 
     db = Database.new(database_config)
     db.import_from(args[:file])
@@ -33,7 +33,7 @@ namespace :db do
 
   desc "Export the database to the specified dumpfile (or default)"
   task :export_to_file, [:file] do |t, args|
-    args.with_defaults(:file => 'data/db_dump.sql')
+    args.with_defaults(:file => 'data/db_dump.zip')
 
     db = Database.new(database_config)
     db.export_to(args[:file])

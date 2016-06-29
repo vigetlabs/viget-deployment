@@ -1,4 +1,6 @@
 class Database
+  include CommandHelper
+
   RECOGNIZED_OPTIONS = %w(user host port socket)
 
   def initialize(options = {})
@@ -6,11 +8,15 @@ class Database
   end
 
   def export_to(filename)
-    run "#{inline_password}#{find_executable('mysqldump')} #{command_flags} #{database} > #{filename}"
+    DumpFile.new(filename).dump do |path|
+      run "#{inline_password}#{find_executable('mysqldump')} #{command_flags} #{database} > #{path}"
+    end
   end
 
   def import_from(filename)
-    run "#{inline_password}#{find_executable('mysql')} #{command_flags} #{database} < #{filename}"
+    File.new(filename).each_file do |file|
+      run "#{inline_password}#{find_executable('mysql')} #{command_flags} #{database} < #{file}"
+    end
   end
 
   def drop
@@ -31,11 +37,6 @@ class Database
     full_command = (database.nil?) ? command : "USE `#{database}`; #{command}"
 
     run "#{inline_password}#{find_executable('mysql')} #{command_flags} -e '#{full_command}'"
-  end
-
-  def run(command)
-    puts command
-    `#{command}`
   end
 
   def database
@@ -63,11 +64,4 @@ class Database
     end
   end
 
-  def find_executable(name)
-    executable = `which #{name}`.chomp
-
-    raise "Could not find executable: '#{name}'" unless $?.success?
-
-    executable
-  end
 end
