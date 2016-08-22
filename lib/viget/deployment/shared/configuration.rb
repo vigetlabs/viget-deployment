@@ -14,6 +14,10 @@ Capistrano::Configuration.instance.load do
         Capistrano::CLI.ui.ask(prompt) {|q| q.default = default }
       end
 
+      def configuration_path_for(filename)
+        "#{shared_path}/config/#{filename}"
+      end
+
       def template_paths
         [
           Viget::Deployment.root_path.join('templates', deployment_type).to_s,
@@ -39,18 +43,37 @@ Capistrano::Configuration.instance.load do
         end
       end
 
-      desc "Create configuration files from templates defined in  directory"
+      def generate_configuration_file(destination_path, template_filename)
+        config = ERB.new(File.read(template_filename), nil, '-')
+
+        run "mkdir -p #{File.dirname(destination_path)}"
+        put config.result(binding), destination_path
+      end
+
+      desc "Create configuration files from templates defined in directory"
       task :create, :except => {:no_release => true} do
         find_templates_in(*template_paths).each do |filename, template_filename|
-          dest_path = "#{shared_path}/config/#{filename}"
+          destination_path = configuration_path_for(filename)
 
-          if !remote_file_exists?(dest_path)
-            config = ERB.new(File.read(template_filename), nil, '-')
-
-            run "mkdir -p #{shared_path}/config"
-            put config.result(binding), dest_path
+          if !remote_file_exists?(destination_path)
+            generate_configuration_file(destination_path, template_filename)
           else
-            logger.debug "File '#{dest_path}' exists on all servers"
+            logger.debug "File '#{destination_path}' exists on all servers"
+          end
+        end
+      end
+
+      desc "Allow recreation of configuration files from templates defined in directory"
+      task :recreate, :except => {:no_release => true} do
+        find_templates_in(*template_paths).each do |filename, template_filename|
+          destination_path = configuration_path_for(filename)
+
+          if remote_file_exists?(destination_path)
+            response = ask("Overwrite '#{filename}'? (y/N): ")
+
+            if response.strip == 'y'
+              generate_configuration_file(destination_path, template_filename)
+            end
           end
         end
       end
