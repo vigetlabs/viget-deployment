@@ -1,12 +1,12 @@
 Capistrano::Configuration.instance.load do
-
-  set :user,          'www-data'
-  set :scm,           :git
-  set :deploy_via,    :remote_cache
-  set :use_sudo,      false
+  set :user,           'deploy'
+  set :scm,            :git
+  set :deploy_via,     :remote_cache
+  set :use_sudo,       false
+  set :group_writable, false
 
   # Forward current user's keys to deployment server for Github checkouts
-  set :ssh_options, {:forward_agent => true}
+  set :ssh_options, { forward_agent: true }
 
   set(:repository) { "git@github.com:vigetlabs/#{application}.git" }
 
@@ -33,5 +33,4 @@ Capistrano::Configuration.instance.load do
   task :online do
     maintenance.off
   end
-
 end
